@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-apps-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /hello
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /java11
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-java11
+                port:
+                  number: 80
+          - path: /java17
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-java17
+                port:
+                  number: 80
+          - path: /java21
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-java21
+                port:
+                  number: 80
+          - path: /java25
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-java25
+                port:
+                  number: 80

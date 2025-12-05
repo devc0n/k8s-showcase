@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-java25
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-java25
+  template:
+    metadata:
+      labels:
+        app: hello-java25
+    spec:
+      containers:
+        - name: hello-java25
+          image: hello-java25:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-java25
+spec:
+  selector:
+    app: hello-java25
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP
